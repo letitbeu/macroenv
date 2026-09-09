@@ -44,7 +44,7 @@
 const isEn = location.pathname === '/en' || location.pathname.startsWith('/en/');
 const T = {
   zh:{
-    title:'1. 市场概览',loading:'正在更新市场数据…',source:'数据来源：FRED、Yahoo Finance、日本财务省',
+    title:'1. 市场概览',loading:'正在更新市场数据…',source:'数据来源：FRED、Yahoo Finance、日本财务省｜北京时间每日早10点更新' ,
     analysisTitle:'自动解读',sourceTip:'点击打开原始数据源',
     groups:{'US Treasury':'美国国债','Curvature':'收益率曲线','Credit Spread':'信用利差','DM Rates':'发达市场利率','Commodity':'大宗商品','Equity':'股票','Currency':'外汇'},
     first:{'US Treasury':'期限','Curvature':'美债','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
@@ -54,7 +54,7 @@ const T = {
     names:{'3m':'3个月','1y':'1年','2y':'2年','5y':'5年','10y':'10年','30y':'30年','2y10y':'2年-10年','5y30y':'5年-30年','10y30y':'10年-30年','US IG':'美国投资级','US HY':'美国高收益','UK 10y':'英国10年','DE 10y':'德国10年','Italy 10y':'意大利10年','Japan 20y':'日本20年','Aussie 10y':'澳大利亚10年','Gold':'黄金','Silver':'白银','Copper':'铜','Brent':'布伦特原油','WTI':'WTI原油','N.Gas':'天然气','Dow Jones':'道琼斯','S&P 500':'标普500','NASDAQ':'纳斯达克','Russell 2k':'罗素2000','PHLX Semi':'费城半导体','VIX':'VIX','Euro Stox':'欧洲斯托克','UK':'英国','France':'法国','Germany':'德国','Swiss':'瑞士','Nikkei':'日经225','Hang Seng':'恒生指数','CSI 300':'沪深300','Taiwan':'台湾加权','Singapore':'新加坡','India':'印度','Australia':'澳大利亚','USD Index':'美元指数','EUR':'欧元','GBP':'英镑','CHF':'瑞郎','JPY':'日元','AUD':'澳元','HKD':'港元','THB':'泰铢','MYR':'马来西亚林吉特','INR':'印度卢比','IDR':'印尼盾','KRW':'韩元','CNH':'离岸人民币'}
   },
   en:{
-    title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan',analysisTitle:'Automated Interpretation',sourceTip:'Open original data source',
+    title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan | Updated daily at 10:00 Beijing Time (UTC+8)' ,analysisTitle:'Automated Interpretation',sourceTip:'Open original data source',
     groups:{'US Treasury':'US Treasury','Curvature':'Curvature','Credit Spread':'Credit Spread','DM Rates':'DM Rates','Commodity':'Commodity','Equity':'Equity','Currency':'Currency'},
     first:{'US Treasury':'Tenor','Curvature':'UST','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
     headsRate:['Latest (%)','5Day','MTD','YTD'],headsBps:['Latest (bps)','5Day','MTD','YTD'],headsPct:['Latest','5Day (%)','MTD %','YTD %'],
@@ -133,7 +133,7 @@ function renderInterpretation(rows){
   document.getElementById('analysis').style.display='block';
 }
 (async()=>{try{
-  const resp=await fetch('/api/market',{cache:'no-store'}),data=await resp.json();if(!resp.ok)throw new Error(data.error||'API error');
+  const resp=await fetch('/data/market.json',{cache:'no-store'}),data=await resp.json();if(!resp.ok)throw new Error(data.error||'API error');
   document.getElementById('left').innerHTML=build(data.rows,['US Treasury','Curvature','Credit Spread','DM Rates','Commodity']);
   document.getElementById('right').innerHTML=build(data.rows,['Equity','Currency']);
   document.getElementById('status').style.display='none';document.getElementById('grid').style.display='grid';

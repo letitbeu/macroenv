@@ -42,13 +42,19 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          files=[Path('index.html'),Path('public/index.html')]
-          for p in files:
+
+          for p in [Path('index.html'),Path('public/index.html')]:
               if not p.exists():
                   continue
               s=p.read_text(encoding='utf-8')
               s=s.replace("source:'数据来源：FRED、Yahoo Finance、日本财务省'", "source:'数据来源：FRED、Yahoo Finance、日本财务省｜北京时间每日早10点更新' ")
               s=s.replace("source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan'", "source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan | Updated daily at 10:00 Beijing Time (UTC+8)' ")
+              s=s.replace("fetch('/api/market',{cache:'no-store'})", "fetch('/data/market.json',{cache:'no-store'})")
+              p.write_text(s,encoding='utf-8')
+
+          p=Path('public/professional.js')
+          if p.exists():
+              s=p.read_text(encoding='utf-8')
               s=s.replace("fetch('/api/market',{cache:'no-store'})", "fetch('/data/market.json',{cache:'no-store'})")
               p.write_text(s,encoding='utf-8')
           PY
@@ -58,7 +64,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html public/index.html public/data/market.json
+          git add index.html public/index.html public/professional.js public/data/market.json
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
             exit 0

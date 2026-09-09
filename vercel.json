@@ -1,51 +1,18 @@
 {
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/public/page.html"
-    },
-    {
-      "source": "/zh",
-      "destination": "/public/page.html"
-    },
-    {
-      "source": "/zh/",
-      "destination": "/public/page.html"
-    },
-    {
-      "source": "/en",
-      "destination": "/public/page.html"
-    },
-    {
-      "source": "/en/",
-      "destination": "/public/page.html"
-    },
-    {
-      "source": "/zh/base",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/en/base",
-      "destination": "/index.html"
-    }
+    { "source": "/", "destination": "/public/page.html" },
+    { "source": "/zh", "destination": "/public/page.html" },
+    { "source": "/zh/", "destination": "/public/page.html" },
+    { "source": "/en", "destination": "/public/page.html" },
+    { "source": "/en/", "destination": "/public/page.html" },
+    { "source": "/zh/base", "destination": "/public/index.html" },
+    { "source": "/en/base", "destination": "/public/index.html" }
   ],
   "headers": [
     {
-      "source": "/professional.js",
+      "source": "/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
-        }
-      ]
-    },
-    {
-      "source": "/data/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
-        }
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
     }
   ]

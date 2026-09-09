@@ -1,0 +1,67 @@
+name: Daily market snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/daily-market-refresh.yml'
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch fresh market snapshot
+        run: |
+          set -euo pipefail
+          mkdir -p public/data
+          curl --fail --silent --show-error \
+            -H 'User-Agent: macroenv-daily-refresh/1.0' \
+            "https://macroenv.vercel.app/api/market?refresh=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o /tmp/market.json
+          python3 - <<'PY'
+          import json
+          p='/tmp/market.json'
+          data=json.load(open(p,'r',encoding='utf-8'))
+          rows=data.get('rows') or []
+          if len(rows) < 20:
+              raise SystemExit(f'Invalid market snapshot: only {len(rows)} rows')
+          with open('public/data/market.json','w',encoding='utf-8') as f:
+              json.dump(data,f,ensure_ascii=False,separators=(',',':'))
+          PY
+
+      - name: Lock dashboard to one daily update and add update notice
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files=[Path('index.html'),Path('public/index.html')]
+          for p in files:
+              if not p.exists():
+                  continue
+              s=p.read_text(encoding='utf-8')
+              s=s.replace("source:'数据来源：FRED、Yahoo Finance、日本财务省'", "source:'数据来源：FRED、Yahoo Finance、日本财务省｜北京时间每日早10点更新' ")
+              s=s.replace("source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan'", "source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan | Updated daily at 10:00 Beijing Time (UTC+8)' ")
+              s=s.replace("fetch('/api/market',{cache:'no-store'})", "fetch('/data/market.json',{cache:'no-store'})")
+              p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Commit daily snapshot
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html public/index.html public/data/market.json
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m "chore: refresh daily market snapshot $(TZ=Asia/Shanghai date +%F)"
+          git push

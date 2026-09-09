@@ -1,11 +1,52 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/public/page.html" },
-    { "source": "/zh", "destination": "/public/page.html" },
-    { "source": "/zh/", "destination": "/public/page.html" },
-    { "source": "/en", "destination": "/public/page.html" },
-    { "source": "/en/", "destination": "/public/page.html" },
-    { "source": "/zh/base", "destination": "/index.html" },
-    { "source": "/en/base", "destination": "/index.html" }
+    {
+      "source": "/",
+      "destination": "/public/page.html"
+    },
+    {
+      "source": "/zh",
+      "destination": "/public/page.html"
+    },
+    {
+      "source": "/zh/",
+      "destination": "/public/page.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/public/page.html"
+    },
+    {
+      "source": "/en/",
+      "destination": "/public/page.html"
+    },
+    {
+      "source": "/zh/base",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/en/base",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/professional.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    }
   ]
 }

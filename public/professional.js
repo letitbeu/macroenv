@@ -1,10 +1,10 @@
 const isEn=location.pathname==='/en'||location.pathname.startsWith('/en/');
 const L=isEn?{
-  title:'Automated Macro Interpretation',tones:{bull:'Constructive',neutral:'Neutral',bear:'Cautious'},
+  title:'Automated Macro Interpretation · Rates / Credit / Growth / Inflation',tones:{bull:'Constructive',neutral:'Neutral',bear:'Cautious'},
   dn:{liquidity:'Liquidity / Financial Conditions',growth:'Growth / Earnings',inflation:'Inflation / Commodities',credit:'Credit'},
   st:{supportive:'Supportive',neutral:'Neutral',tight:'Tightening',strong:'Resilient',soft:'Soft',hot:'Elevated',cool:'Contained',healthy:'Healthy',watch:'Watch',stress:'Stressed'}
 }:{
-  title:'自动宏观点评',tones:{bull:'偏乐观',neutral:'中性',bear:'偏谨慎'},
+  title:'自动宏观点评 · 利率 / 信用 / 增长 / 通胀',tones:{bull:'偏乐观',neutral:'中性',bear:'偏谨慎'},
   dn:{liquidity:'流动性/金融条件',growth:'增长/盈利',inflation:'通胀/商品',credit:'信用'},
   st:{supportive:'宽松/支持',neutral:'中性',tight:'收紧',strong:'偏强',soft:'偏弱',hot:'偏热',cool:'温和',healthy:'健康',watch:'观察',stress:'承压'}
 };

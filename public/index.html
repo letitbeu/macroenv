@@ -5,141 +5,66 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Market Overview</title>
 <style>
-  *{box-sizing:border-box}
-  html,body{margin:0;background:#fff;color:#202020;font-family:Arial,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif}
-  .sheet{width:1188px;margin:18px auto 30px;padding:0 4px;background:#fff}
-  .title{font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif;font-size:35px;font-weight:700;letter-spacing:.02em;margin:8px 0 44px 0}
-  .date{font-weight:700;font-size:14px;margin:0 0 5px 12px}
-  .columns{display:grid;grid-template-columns:560px 600px;column-gap:28px;align-items:start}
-  .section{margin:0 0 7px 0}.section-name{font-size:16px;font-weight:700;line-height:20px;margin:0 0 1px 3px}
-  table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.15} col.c1{width:34%} col.cn{width:16.5%}
-  thead th{height:26px;padding:4px 5px 3px;background:#0877b7;color:#fff;font-size:12px;font-weight:700;border-right:1px solid rgba(255,255,255,.35);white-space:nowrap}
-  thead th:first-child{text-align:left} thead th:not(:first-child){text-align:right}
-  tbody td{height:24px;padding:3px 7px;border-bottom:1px solid #d8d8d8;white-space:nowrap;overflow:hidden;text-overflow:clip}
-  tbody tr:last-child td{border-bottom:2px solid #353535} tbody td:first-child{text-align:left} tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
-  .latest{background:#fff}.p1{background:#e3f1e6}.p2{background:#b9dfc2}.p3{background:#70c68b}.n1{background:#fae7e8}.n2{background:#f7c4c7}.n3{background:#ef777f}.z{background:#f7f7f7}.na{color:#aaa}
-  .source-link{color:inherit;text-decoration:none;border-bottom:1px dotted #9aa0a6;cursor:pointer}.source-link:hover{color:#0877b7;border-bottom-color:#0877b7}
-  .source{font-size:11px;margin:6px 0 0 4px;color:#2f2f2f}.status{font-size:12px;color:#888;margin:8px 0 0 12px}
-  .analysis{margin:28px 0 0 4px;border-top:2px solid #353535;padding-top:10px;display:none}
-  .analysis-title{font-size:18px;font-weight:700;margin:0 0 10px}
-  .analysis-row{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #d8d8d8;font-size:13px;line-height:1.65}
-  .analysis-row:last-child{border-bottom:0}.horizon{font-weight:700}.tone{font-weight:700}
-  @media(max-width:1228px){.sheet{transform-origin:top left;transform:scale(calc((100vw - 12px)/1188));margin-left:6px;margin-right:0}}
-  @media print{.sheet{margin:0 auto}.analysis{break-inside:avoid}.source-link{border-bottom:0}}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:#202020;font-family:Arial,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif}.sheet{width:1220px;margin:18px auto 34px;padding:0 6px;position:relative}.title{font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif;font-size:35px;font-weight:700;letter-spacing:.02em;margin:8px 0 44px}.lang{position:absolute;right:8px;top:4px;font-size:12px;border:1px solid #cfd6dc;border-radius:5px;padding:5px 8px;background:#fff}.lang a{color:#0877b7;text-decoration:none;font-weight:700}.lang b{color:#222}.date{font-weight:700;font-size:14px;margin:0 0 5px 12px}.columns{display:grid;grid-template-columns:574px 610px;column-gap:24px;align-items:start}.section{margin:0 0 7px}.section-name{font-size:16px;font-weight:700;line-height:20px;margin:0 0 1px 3px}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.15}col.c1{width:34%}col.cn{width:16.5%}thead th{height:27px;padding:4px 5px 3px;background:#0877b7;color:#fff;font-size:11.5px;font-weight:700;border-right:1px solid rgba(255,255,255,.35);white-space:nowrap;overflow:hidden}thead th:first-child{text-align:left}thead th:not(:first-child){text-align:right}tbody td{height:24px;padding:3px 7px;border-bottom:1px solid #d8d8d8;white-space:nowrap;overflow:hidden;text-overflow:clip}tbody tr:last-child td{border-bottom:2px solid #353535}tbody td:first-child{text-align:left}tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}.latest{background:#fff}.p1{background:#e3f1e6}.p2{background:#b9dfc2}.p3{background:#70c68b}.n1{background:#fae7e8}.n2{background:#f7c4c7}.n3{background:#ef777f}.z{background:#f7f7f7}.na{color:#aaa}.source-link{color:inherit;text-decoration:none;border-bottom:1px dotted #9aa0a6}.source-link:hover{color:#0877b7;border-bottom-color:#0877b7}.source{font-size:11px;margin:6px 0 0 4px;color:#2f2f2f}.status{font-size:12px;color:#888;margin:8px 0 0 12px}.analysis{margin:28px 0 0 4px;border-top:2px solid #353535;padding-top:10px;display:none}.analysis-title{font-size:18px;font-weight:700;margin:0 0 10px}.regime{padding:10px 12px;background:#f5f8fa;border-left:4px solid #0877b7;font-size:13px;line-height:1.7;margin-bottom:10px}.regime strong{font-size:14px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.card{border:1px solid #d9dee3;padding:8px 9px;min-height:78px}.card small{display:block;color:#666;margin-bottom:3px}.card strong{display:block;font-size:14px;margin-bottom:4px}.card span{font-size:11px;color:#555;line-height:1.45}.cross{margin:6px 0 6px;padding:8px 10px;background:#fafafa;border:1px solid #e2e2e2;font-size:12px;line-height:1.65}.macro-row{display:grid;grid-template-columns:132px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid #d8d8d8;font-size:13px;line-height:1.72}.macro-row:last-child{border-bottom:0}.horizon{font-weight:700}.tone{display:block;margin-top:2px}.primary{display:block;margin-top:3px;color:#666;font-size:11px;font-weight:400}@media(max-width:1260px){.sheet{transform-origin:top left;transform:scale(calc((100vw - 12px)/1220));margin-left:6px;margin-right:0}}@media print{.lang{display:none}.analysis{break-inside:avoid}.source-link{border-bottom:0}}
 </style>
 </head>
 <body>
 <div class="sheet">
-  <div id="title" class="title">1. 市场概览</div>
+  <div id="lang" class="lang"></div>
+  <div id="title" class="title"></div>
   <div id="date" class="date"></div>
   <div id="status" class="status">Loading...</div>
   <div class="columns" id="grid" style="display:none"><div id="left"></div><div id="right"></div></div>
   <div id="source" class="source" style="display:none"></div>
-  <div id="analysis" class="analysis">
+  <section id="analysis" class="analysis">
     <div id="analysisTitle" class="analysis-title"></div>
-    <div id="analysisBody"></div>
-  </div>
+    <div id="regime" class="regime"></div>
+    <div id="cards" class="cards"></div>
+    <div id="cross" class="cross" style="display:none"></div>
+    <div id="analysisRows"></div>
+  </section>
 </div>
 <script>
-const isEn = location.pathname === '/en' || location.pathname.startsWith('/en/');
-const T = {
-  zh:{
-    title:'1. 市场概览',loading:'正在更新市场数据…',source:'数据来源：FRED、Yahoo Finance、日本财务省｜北京时间每日早10点更新' ,
-    analysisTitle:'自动解读',sourceTip:'点击打开原始数据源',
-    groups:{'US Treasury':'美国国债','Curvature':'收益率曲线','Credit Spread':'信用利差','DM Rates':'发达市场利率','Commodity':'大宗商品','Equity':'股票','Currency':'外汇'},
-    first:{'US Treasury':'期限','Curvature':'美债','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
-    headsRate:['最新 (%)','5日 (bps)','月初至今 (bps)','年初至今 (bps)'],headsBps:['最新 (bps)','5日 (bps)','月初至今 (bps)','年初至今 (bps)'],headsPct:['最新','5日 (%)','月初至今 %','年初至今 %'],
-    horizons:['短期（1–2周）','中期（1–3个月）','长期（6–12个月）'],
-    tones:{bull:'偏多',neutral:'中性',bear:'偏空'},
-    names:{'3m':'3个月','1y':'1年','2y':'2年','5y':'5年','10y':'10年','30y':'30年','2y10y':'2年-10年','5y30y':'5年-30年','10y30y':'10年-30年','US IG':'美国投资级','US HY':'美国高收益','UK 10y':'英国10年','DE 10y':'德国10年','Italy 10y':'意大利10年','Japan 20y':'日本20年','Aussie 10y':'澳大利亚10年','Gold':'黄金','Silver':'白银','Copper':'铜','Brent':'布伦特原油','WTI':'WTI原油','N.Gas':'天然气','Dow Jones':'道琼斯','S&P 500':'标普500','NASDAQ':'纳斯达克','Russell 2k':'罗素2000','PHLX Semi':'费城半导体','VIX':'VIX','Euro Stox':'欧洲斯托克','UK':'英国','France':'法国','Germany':'德国','Swiss':'瑞士','Nikkei':'日经225','Hang Seng':'恒生指数','CSI 300':'沪深300','Taiwan':'台湾加权','Singapore':'新加坡','India':'印度','Australia':'澳大利亚','USD Index':'美元指数','EUR':'欧元','GBP':'英镑','CHF':'瑞郎','JPY':'日元','AUD':'澳元','HKD':'港元','THB':'泰铢','MYR':'马来西亚林吉特','INR':'印度卢比','IDR':'印尼盾','KRW':'韩元','CNH':'离岸人民币'}
-  },
-  en:{
-    title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan | Updated daily at 10:00 Beijing Time (UTC+8)' ,analysisTitle:'Automated Interpretation',sourceTip:'Open original data source',
-    groups:{'US Treasury':'US Treasury','Curvature':'Curvature','Credit Spread':'Credit Spread','DM Rates':'DM Rates','Commodity':'Commodity','Equity':'Equity','Currency':'Currency'},
-    first:{'US Treasury':'Tenor','Curvature':'UST','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
-    headsRate:['Latest (%)','5Day (bps)','MTD (bps)','YTD (bps)'],headsBps:['Latest (bps)','5Day (bps)','MTD (bps)','YTD (bps)'],headsPct:['Latest','5Day (%)','MTD %','YTD %'],
-    horizons:['Short term (1–2 weeks)','Medium term (1–3 months)','Long term (6–12 months)'],
-    tones:{bull:'Bullish',neutral:'Neutral',bear:'Bearish'},names:{}
-  }
+const isEn=location.pathname==='/en'||location.pathname.startsWith('/en/');
+const T={
+zh:{title:'1. 市场概览',loading:'正在更新市场数据…',source:'数据来源：FRED、Yahoo Finance、日本财务省｜北京时间每日早10点更新',analysisTitle:'自动宏观点评 · 机构跨资产框架',sourceTip:'点击打开原始数据源',groups:{'US Treasury':'美国国债','Curvature':'收益率曲线','Credit Spread':'信用利差','DM Rates':'发达市场利率','Commodity':'大宗商品','Equity':'股票','Currency':'外汇'},first:{'US Treasury':'期限','Curvature':'美债','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},headsRate:['最新 (%)','5日 (bps)','月初至今 (bps)','年初至今 (bps)'],headsBps:['最新 (bps)','5日 (bps)','月初至今 (bps)','年初至今 (bps)'],headsPct:['最新','5日 (%)','月初至今 %','年初至今 %'],tones:{bull:'偏乐观',neutral:'中性',bear:'偏谨慎'},names:{'3m':'3个月','1y':'1年','2y':'2年','5y':'5年','10y':'10年','30y':'30年','2y10y':'2年-10年','5y30y':'5年-30年','10y30y':'10年-30年','US IG':'美国投资级','US HY':'美国高收益','UK 10y':'英国10年','DE 10y':'德国10年','Italy 10y':'意大利10年','Japan 20y':'日本20年','Aussie 10y':'澳大利亚10年','Gold':'黄金','Silver':'白银','Copper':'铜','Brent':'布伦特原油','WTI':'WTI原油','N.Gas':'天然气','Dow Jones':'道琼斯','S&P 500':'标普500','NASDAQ':'纳斯达克','Russell 2k':'罗素2000','PHLX Semi':'费城半导体','VIX':'VIX','Euro Stox':'欧洲斯托克','UK':'英国','France':'法国','Germany':'德国','Swiss':'瑞士','Nikkei':'日经225','Hang Seng':'恒生指数','CSI 300':'沪深300','Taiwan':'台湾加权','Singapore':'新加坡','India':'印度','Australia':'澳大利亚','USD Index':'美元指数','EUR':'欧元','GBP':'英镑','CHF':'瑞郎','JPY':'日元','AUD':'澳元','HKD':'港元','THB':'泰铢','MYR':'马来西亚林吉特','INR':'印度卢比','IDR':'印尼盾','KRW':'韩元','CNH':'离岸人民币'}},
+en:{title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan | Updated daily at 10:00 Beijing Time (UTC+8)',analysisTitle:'Automated Macro Interpretation · Institutional Cross-Asset Framework',sourceTip:'Open original data source',groups:{'US Treasury':'US Treasury','Curvature':'Curvature','Credit Spread':'Credit Spread','DM Rates':'DM Rates','Commodity':'Commodity','Equity':'Equity','Currency':'Currency'},first:{'US Treasury':'Tenor','Curvature':'UST','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},headsRate:['Latest (%)','5Day (bps)','MTD (bps)','YTD (bps)'],headsBps:['Latest (bps)','5Day (bps)','MTD (bps)','YTD (bps)'],headsPct:['Latest','5Day (%)','MTD %','YTD %'],tones:{bull:'Constructive',neutral:'Neutral',bear:'Cautious'},names:{}}
 };
-const L=T[isEn?'en':'zh']; document.documentElement.lang=isEn?'en':'zh-CN'; document.getElementById('title').textContent=L.title; document.getElementById('status').textContent=L.loading;
+const L=T[isEn?'en':'zh'];document.documentElement.lang=isEn?'en':'zh-CN';document.getElementById('title').textContent=L.title;document.getElementById('status').textContent=L.loading;document.getElementById('lang').innerHTML=isEn?'<a href="/zh">中文</a> &nbsp;|&nbsp; <b>EN</b>':'<b>中文</b> &nbsp;|&nbsp; <a href="/en">EN</a>';
 function label(name){return isEn?name:(L.names[name]||name)}
 function displayDate(){const d=new Date();return isEn?`${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`:`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`}
 document.getElementById('date').textContent=displayDate();
-function heat(v,unit){if(v==null||!Number.isFinite(v))return '';const a=Math.abs(v);if(a<.00001)return'z';let t1,t2;if(unit==='bps'){t1=5;t2=15}else{t1=.75;t2=3}if(v>0)return a>=t2?'p3':a>=t1?'p2':'p1';return a>=t2?'n3':a>=t1?'n2':'n1'}
+function heat(v,unit){if(v==null||!Number.isFinite(v))return'';const a=Math.abs(v);if(a<.00001)return'z';let t1,t2;if(unit==='bps'){t1=5;t2=15}else{t1=.75;t2=3}if(v>0)return a>=t2?'p3':a>=t1?'p2':'p1';return a>=t2?'n3':a>=t1?'n2':'n1'}
 function paren(v,d=1){if(v==null||!Number.isFinite(v))return'<span class="na">—</span>';const x=Math.abs(v)<.05?0:v;return x<0?`(${Math.abs(x).toFixed(d)})`:x.toFixed(d)}
 function latest(r){if(r.latest==null||!Number.isFinite(r.latest))return'<span class="na">—</span>';const d=r.decimals??1;return Number(r.latest).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d})}
-function heads(group){if(group==='US Treasury')return L.headsRate;if(group==='Curvature'||group==='Credit Spread')return L.headsBps;if(group==='DM Rates')return L.headsRate;return L.headsPct}
-function sourceUrl(r){
-  if(r.group==='Curvature'){
-    const pairs={'2y10y':['DGS2','DGS10'],'5y30y':['DGS5','DGS30'],'10y30y':['DGS10','DGS30']};
-    const p=pairs[r.name]; if(p)return `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${p[0]},${p[1]}`;
-  }
-  if(r.group==='DM Rates'&&r.name==='Japan 20y')return 'https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/historical/jgbcme_all.csv';
-  if(r.id)return `https://fred.stlouisfed.org/series/${encodeURIComponent(r.id)}`;
-  if(r.symbol)return `https://finance.yahoo.com/quote/${encodeURIComponent(r.symbol)}`;
-  return null;
-}
+function heads(group){if(group==='US Treasury'||group==='DM Rates')return L.headsRate;if(group==='Curvature'||group==='Credit Spread')return L.headsBps;return L.headsPct}
+function sourceUrl(r){if(r.group==='Curvature'){const pairs={'2y10y':['DGS2','DGS10'],'5y30y':['DGS5','DGS30'],'10y30y':['DGS10','DGS30']};const p=pairs[r.name];if(p)return`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${p[0]},${p[1]}`}if(r.group==='DM Rates'&&r.name==='Japan 20y')return'https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/historical/jgbcme_all.csv';if(r.id)return`https://fred.stlouisfed.org/series/${encodeURIComponent(r.id)}`;if(r.symbol)return`https://finance.yahoo.com/quote/${encodeURIComponent(r.symbol)}`;return null}
 function sourceAnchor(r){const u=sourceUrl(r),txt=label(r.name);return u?`<a class="source-link" href="${u}" target="_blank" rel="noopener noreferrer" title="${L.sourceTip}">${txt}</a>`:txt}
-function section(group,rows){const h=heads(group),unit=['US Treasury','Curvature','Credit Spread','DM Rates'].includes(group)?'bps':'pct';return `<div class="section"><div class="section-name">${L.groups[group]}</div><table><colgroup><col class="c1"><col class="cn"><col class="cn"><col class="cn"><col class="cn"></colgroup><thead><tr><th>${L.first[group]||''}</th><th>${h[0]}</th><th>${h[1]}</th><th>${h[2]}</th><th>${h[3]}</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${sourceAnchor(r)}</td><td class="latest">${latest(r)}</td><td class="${heat(r.d5,unit)}">${paren(r.d5,unit==='bps'?0:1)}</td><td class="${heat(r.mtd,unit)}">${paren(r.mtd,unit==='bps'?0:1)}</td><td class="${heat(r.ytd,unit)}">${paren(r.ytd,unit==='bps'?0:1)}</td></tr>`).join('')}</tbody></table></div>`}
+function section(group,rows){const h=heads(group),unit=['US Treasury','Curvature','Credit Spread','DM Rates'].includes(group)?'bps':'pct';return`<div class="section"><div class="section-name">${L.groups[group]}</div><table><colgroup><col class="c1"><col class="cn"><col class="cn"><col class="cn"><col class="cn"></colgroup><thead><tr><th>${L.first[group]||''}</th><th>${h[0]}</th><th>${h[1]}</th><th>${h[2]}</th><th>${h[3]}</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${sourceAnchor(r)}</td><td class="latest">${latest(r)}</td><td class="${heat(r.d5,unit)}">${paren(r.d5,unit==='bps'?0:1)}</td><td class="${heat(r.mtd,unit)}">${paren(r.mtd,unit==='bps'?0:1)}</td><td class="${heat(r.ytd,unit)}">${paren(r.ytd,unit==='bps'?0:1)}</td></tr>`).join('')}</tbody></table></div>`}
 function build(rows,groups){return groups.map(g=>section(g,rows.filter(r=>r.group===g))).join('')}
-function getRow(rows,group,name){return rows.find(r=>r.group===group&&r.name===name)||{}}
-function n(v,d=1){return Number.isFinite(v)?Number(v).toFixed(d):'—'}
-function sign(v,d=1){if(!Number.isFinite(v))return'—';return `${v>0?'+':''}${Number(v).toFixed(d)}`}
-function classify(score){return score>=1.4?'bull':score<=-1.4?'bear':'neutral'}
-function scorePeriod(rows,key){
-  const sp=getRow(rows,'Equity','S&P 500')[key], btc=getRow(rows,'Commodity','BTC')[key], vix=getRow(rows,'Equity','VIX')[key],
-        y10=getRow(rows,'US Treasury','10y')[key], hy=getRow(rows,'Credit Spread','US HY')[key], brent=getRow(rows,'Commodity','Brent')[key];
-  let s=0;
-  if(Number.isFinite(sp))s+=sp>0?1:-1;
-  if(Number.isFinite(btc))s+=btc>0?.6:-.6;
-  if(Number.isFinite(vix))s+=vix<0?.7:-.7;
-  if(Number.isFinite(y10))s+=y10<0?.7:-.7;
-  if(Number.isFinite(hy))s+=hy<0?1:-1;
-  if(Number.isFinite(brent)&&Math.abs(brent)>=3)s+=brent<0?.5:-.5;
-  return classify(s);
-}
-function interpretation(rows){
-  const y10=getRow(rows,'US Treasury','10y'), hy=getRow(rows,'Credit Spread','US HY'), brent=getRow(rows,'Commodity','Brent'),
-        sp=getRow(rows,'Equity','S&P 500'), btc=getRow(rows,'Commodity','BTC'), vix=getRow(rows,'Equity','VIX'),
-        usd=getRow(rows,'Currency','USD Index'), curve=getRow(rows,'Curvature','2y10y');
-  const st=scorePeriod(rows,'d5'), mt=scorePeriod(rows,'mtd');
-  let ltScore=0;
-  if(Number.isFinite(sp.ytd))ltScore+=sp.ytd>0?1:-1;
-  if(Number.isFinite(btc.ytd))ltScore+=btc.ytd>0?.6:-.6;
-  if(Number.isFinite(hy.ytd))ltScore+=hy.ytd<0?1:-1;
-  if(Number.isFinite(curve.latest))ltScore+=curve.latest>0?.4:-.4;
-  if(Number.isFinite(y10.latest))ltScore+=y10.latest<4.5?.5:y10.latest>5?-.5:0;
-  const lt=classify(ltScore);
-  const credit = Number.isFinite(hy.latest) ? (hy.latest<300?'low':hy.latest<400?'mid':'high') : 'na';
-
-  if(!isEn){
-    const creditText=credit==='low'?'信用利差仍低，当前更偏估值/利率冲击而非系统性信用风险':credit==='mid'?'信用利差已进入中等压力区，需要警惕风险从估值向基本面传导':credit==='high'?'信用利差处于高压区，系统性风险权重明显上升':'信用数据暂不完整';
-    const s1=`过去5个交易日：10年美债收益率变动 ${sign(y10.d5,0)}bp，高收益债利差变动 ${sign(hy.d5,0)}bp，Brent ${sign(brent.d5)}%，标普500 ${sign(sp.d5)}%，BTC ${sign(btc.d5)}%。${creditText}。`;
-    const s2=`本月至今：10年美债 ${sign(y10.mtd,0)}bp，高收益债利差 ${sign(hy.mtd,0)}bp，Brent ${sign(brent.mtd)}%，美元指数 ${sign(usd.mtd)}%，VIX ${sign(vix.mtd)}%。若利率和油价继续上行且信用利差同步走阔，中期风险会由“估值压缩”升级为“信用收紧”。`;
-    const s3=`年初至今：标普500 ${sign(sp.ytd)}%，BTC ${sign(btc.ytd)}%，高收益债利差 ${sign(hy.ytd,0)}bp；当前2年-10年美债曲线为 ${n(curve.latest,0)}bp。长期核心仍是盈利增长能否覆盖高利率带来的估值压力，信用利差是否持续稳定是最重要的确认项。`;
-    return [[L.horizons[0],L.tones[st],s1],[L.horizons[1],L.tones[mt],s2],[L.horizons[2],L.tones[lt],s3]];
-  }
-  const creditText=credit==='low'?'Credit spreads remain low, pointing more to valuation/rate pressure than systemic credit stress':credit==='mid'?'Credit spreads are in a moderate-stress zone, raising the risk of transmission into fundamentals':credit==='high'?'Credit spreads are in a high-stress zone and systemic risk is materially higher':'Credit data are incomplete';
-  const s1=`Over 5 trading days: US 10Y ${sign(y10.d5,0)}bp, HY spread ${sign(hy.d5,0)}bp, Brent ${sign(brent.d5)}%, S&P 500 ${sign(sp.d5)}%, BTC ${sign(btc.d5)}%. ${creditText}.`;
-  const s2=`MTD: US 10Y ${sign(y10.mtd,0)}bp, HY spread ${sign(hy.mtd,0)}bp, Brent ${sign(brent.mtd)}%, DXY ${sign(usd.mtd)}%, VIX ${sign(vix.mtd)}%. If rates and oil keep rising while credit spreads widen, medium-term pressure shifts from valuation compression to credit tightening.`;
-  const s3=`YTD: S&P 500 ${sign(sp.ytd)}%, BTC ${sign(btc.ytd)}%, HY spread ${sign(hy.ytd,0)}bp; the 2Y-10Y Treasury curve is ${n(curve.latest,0)}bp. Long-term direction depends on whether earnings growth can offset the valuation drag from high rates, with credit spreads as the key confirmation signal.`;
-  return [[L.horizons[0],L.tones[st],s1],[L.horizons[1],L.tones[mt],s2],[L.horizons[2],L.tones[lt],s3]];
-}
-function renderInterpretation(rows){
-  const data=interpretation(rows);
-  document.getElementById('analysisTitle').textContent=L.analysisTitle;
-  document.getElementById('analysisBody').innerHTML=data.map(x=>`<div class="analysis-row"><div class="horizon">${x[0]}<br><span class="tone">${x[1]}</span></div><div>${x[2]}</div></div>`).join('');
-  document.getElementById('analysis').style.display='block';
-}
-(async()=>{try{
-  const resp=await fetch('/data/market.json',{cache:'no-store'}),data=await resp.json();if(!resp.ok)throw new Error(data.error||'API error');
-  document.getElementById('left').innerHTML=build(data.rows,['US Treasury','Curvature','Credit Spread','DM Rates','Commodity']);
-  document.getElementById('right').innerHTML=build(data.rows,['Equity','Currency']);
-  document.getElementById('status').style.display='none';document.getElementById('grid').style.display='grid';
-  document.getElementById('source').textContent=L.source;document.getElementById('source').style.display='block';
-  renderInterpretation(data.rows);
-}catch(e){document.getElementById('status').textContent=(isEn?'Data update failed: ':'数据更新失败：')+e.message}})();
+function R(rows,g,n){return rows.find(r=>r.group===g&&r.name===n)||{}}
+function V(rows,g,n,k){const x=R(rows,g,n)[k];return Number.isFinite(x)?x:null}
+function sg(x,d=1,suffix=''){return Number.isFinite(x)?`${x>0?'+':''}${Number(x).toFixed(d)}${suffix}`:'—'}
+function nm(x,d=0,suffix=''){return Number.isFinite(x)?`${Number(x).toFixed(d)}${suffix}`:'—'}
+function clamp(x){return Math.max(-2,Math.min(2,x))}
+function creditState(rows){const x=V(rows,'Credit Spread','US HY','latest');return x==null?'watch':x<300?'healthy':x<400?'watch':'stress'}
+function drivers(rows,key){const y10=V(rows,'US Treasury','10y',key),hy=V(rows,'Credit Spread','US HY',key),usd=V(rows,'Currency','USD Index',key),vix=V(rows,'Equity','VIX',key),sp=V(rows,'Equity','S&P 500',key),rut=V(rows,'Equity','Russell 2k',key),semi=V(rows,'Equity','PHLX Semi',key),cu=V(rows,'Commodity','Copper',key),br=V(rows,'Commodity','Brent',key);let liquidity=0,growth=0,inflation=0;if(y10!=null)liquidity+=y10>=7?-1:y10>=3?-.5:y10<=-7?1:y10<=-3?.5:0;if(hy!=null)liquidity+=hy>=7?-1:hy>=3?-.5:hy<=-7?1:hy<=-3?.5:0;if(usd!=null)liquidity+=usd>=.75?-.6:usd<=-.75?.6:0;if(vix!=null)liquidity+=vix>=7?-.5:vix<=-7?.5:0;if(cu!=null)growth+=cu>=2?1:cu>=.7?.5:cu<=-2?-1:cu<=-.7?-.5:0;if(rut!=null)growth+=rut>=1?.6:rut<=-1?-.6:0;if(sp!=null)growth+=sp>=.7?.5:sp<=-.7?-.5:0;if(semi!=null)growth+=semi>=2?.7:semi<=-2?-.7:0;if(br!=null)inflation+=br>=7?1.5:br>=3?1:br<=-5?-.8:br<=-3?-.5:0;return{liquidity:clamp(liquidity),growth:clamp(growth),inflation:clamp(inflation)}}
+function state(type,x){if(type==='liquidity')return x>=.7?'supportive':x<=-.7?'tight':'neutral';if(type==='growth')return x>=.7?'strong':x<=-.7?'soft':'neutral';return x>=.7?'hot':x<=-.5?'cool':'neutral'}
+function stateText(type,s){if(isEn){const m={supportive:'Supportive',tight:'Tightening',neutral:'Neutral',strong:'Resilient',soft:'Soft',hot:'Reflationary',cool:'Contained',healthy:'Healthy',watch:'Watch',stress:'Stressed'};return m[s]}const m={supportive:'宽松/支持',tight:'收紧',neutral:'中性',strong:'韧性偏强',soft:'偏弱',hot:'再通胀偏热',cool:'温和',healthy:'健康',watch:'观察',stress:'承压'};return m[s]}
+function view(rows,key){const d=drivers(rows,key),c=creditState(rows);const score=1.15*d.liquidity+.95*d.growth-.95*d.inflation-(c==='stress'?1.5:c==='watch'?.35:0);const w={liquidity:Math.abs(d.liquidity)*1.15,growth:Math.abs(d.growth)*.95,inflation:Math.abs(d.inflation)*.95,credit:c==='stress'?1.5:c==='watch'?.35:.15};const primary=Object.entries(w).sort((a,b)=>b[1]-a[1])[0][0];const tone=score>=1.05?'bull':score<=-1.05?'bear':'neutral';return{d,c,score,primary,tone}}
+function primaryLabel(p){const zh={liquidity:'流动性/金融条件',growth:'增长/盈利',inflation:'通胀/商品',credit:'信用'};const en={liquidity:'Liquidity / Financial Conditions',growth:'Growth / Earnings',inflation:'Inflation / Commodities',credit:'Credit'};return(isEn?en:zh)[p]}
+function primarySentence(rows,key){const x=view(rows,key);if(!isEn){if(x.primary==='liquidity')return x.d.liquidity<0?'主要约束来自流动性与金融条件收紧，而不是经济增长崩塌':'主要支撑来自流动性与金融条件改善';if(x.primary==='growth')return x.d.growth<0?'主要约束来自市场隐含的增长与盈利预期走弱':'主要支撑来自增长与盈利韧性';if(x.primary==='inflation')return x.d.inflation>0?'主要约束来自能源驱动的再通胀压力':'主要支撑来自通胀与商品压力缓和';return x.c==='stress'?'主要风险已转向信用收紧':'信用仍健康，系统性风险暂低'}if(x.primary==='liquidity')return x.d.liquidity<0?'The main constraint is tighter liquidity and financial conditions, not collapsing growth':'The main support comes from easier liquidity and financial conditions';if(x.primary==='growth')return x.d.growth<0?'The main constraint is softer market-implied growth and earnings momentum':'The main support comes from resilient growth and earnings';if(x.primary==='inflation')return x.d.inflation>0?'The main constraint is energy-led reflation':'The main support comes from easing inflation and commodity pressure';return x.c==='stress'?'Credit tightening has become the dominant risk':'Credit remains healthy, limiting systemic downside'}
+function longTone(rows){let x=0;const spy=V(rows,'Equity','S&P 500','ytd'),semi=V(rows,'Equity','PHLX Semi','ytd'),cu=V(rows,'Commodity','Copper','ytd'),hy=V(rows,'Credit Spread','US HY','latest'),y10=V(rows,'US Treasury','10y','latest'),br=V(rows,'Commodity','Brent','ytd'),btc=V(rows,'Commodity','BTC','ytd');if(spy!=null)x+=spy>0?1:-1;if(semi!=null)x+=semi>20?.8:semi>0?.4:-.6;if(cu!=null)x+=cu>0?.5:-.5;if(hy!=null)x+=hy<300?.8:hy>=400?-1:0;if(y10!=null)x+=y10>=5?-.8:y10<4.4?.4:0;if(br!=null&&br>35)x-=.6;if(btc!=null)x+=btc>0?.3:-.3;return x>=1.5?'bull':x<=-.5?'bear':'neutral'}
+function crossAsset(rows){const out=[],y10=V(rows,'US Treasury','10y','d5'),usd=V(rows,'Currency','USD Index','d5'),semi=V(rows,'Equity','PHLX Semi','d5'),sp=V(rows,'Equity','S&P 500','d5'),btc=V(rows,'Commodity','BTC','d5'),jpy=V(rows,'Currency','JPY','d5');if(y10!=null&&usd!=null&&y10>=3&&usd<=-.5)out.push(isEn?'Long-end yields are rising while the dollar is weakening: the move looks more like term-premium/fiscal/reflation pressure than a pure Fed-hawkish shock.':'长端利率上行而美元走弱：压力更偏期限溢价、财政供给与再通胀，而不是单纯“美联储更鹰”。');if(semi!=null&&sp!=null&&semi-sp>=1.5)out.push(isEn?'Semiconductors are materially outperforming the broad market, indicating concentrated earnings leadership rather than broad risk-on.':'半导体显著跑赢大盘，说明权益更依赖盈利确定性和集中度，而不是全面 Risk-on。');if(btc!=null&&semi!=null&&btc<0&&semi>1)out.push(isEn?'Bitcoin is lagging high-beta technology, arguing against a broad liquidity-driven risk-on regime.':'BTC落后于高贝塔科技，不支持“广谱流动性牛市”的解释。');if(jpy!=null&&jpy<=-2)out.push(isEn?'JPY appreciation is large enough to keep yen-funded carry-trade deleveraging on the risk radar.':'日元明显升值，全球套息交易去杠杆仍需纳入风险监测。');return out}
+function renderAnalysis(rows){const st=view(rows,'d5'),mt=view(rows,'mtd'),lt=longTone(rows),c=creditState(rows),cross=crossAsset(rows),sd=st.d;document.getElementById('analysisTitle').textContent=L.analysisTitle;const regimeState=`${isEn?'Current mix':'当前组合'}：${isEn?'growth/earnings':'增长/盈利'} ${stateText('growth',state('growth',sd.growth))}，${isEn?'liquidity/financial conditions':'流动性/金融条件'} ${stateText('liquidity',state('liquidity',sd.liquidity))}，${isEn?'inflation/commodities':'通胀/商品'} ${stateText('inflation',state('inflation',sd.inflation))}，${isEn?'credit':'信用'} ${stateText('credit',c)}。`;const creditLine=c==='healthy'?(isEn?'Credit does not confirm systemic stress, so the pressure is still primarily valuation/duration rather than credit.':'信用尚未确认系统性风险，因此当前更像估值与久期压力，而不是信用杀。'):c==='watch'?(isEn?'Credit is in a watch zone; monitor transmission from financial conditions into fundamentals.':'信用进入观察区，需要确认金融条件是否向企业基本面传导。'):(isEn?'Credit is stressed, shifting the problem from valuation into fundamentals and financing.':'信用已明显承压，风险从估值问题升级为基本面与融资问题。');document.getElementById('regime').innerHTML=`<strong>${regimeState}</strong> ${isEn?'Near-term stance':'短期判断'}：${L.tones[st.tone]}。${primarySentence(rows,'d5')}。${creditLine}`;
+const cards=[
+[isEn?'Liquidity / Financial Conditions':'流动性 / 金融条件',stateText('liquidity',state('liquidity',sd.liquidity)),`${isEn?'US 10Y':'10年美债'} ${sg(V(rows,'US Treasury','10y','d5'),0,'bp')} · HY ${sg(V(rows,'Credit Spread','US HY','d5'),0,'bp')} · DXY ${sg(V(rows,'Currency','USD Index','d5'),1,'%')}`],
+[isEn?'Growth / Earnings':'增长 / 盈利',stateText('growth',state('growth',sd.growth)),`${isEn?'Copper':'铜'} ${sg(V(rows,'Commodity','Copper','d5'),1,'%')} · ${isEn?'PHLX Semis':'费城半导体'} ${sg(V(rows,'Equity','PHLX Semi','d5'),1,'%')} · Russell ${sg(V(rows,'Equity','Russell 2k','d5'),1,'%')}`],
+[isEn?'Inflation / Commodities':'通胀 / 商品',stateText('inflation',state('inflation',sd.inflation)),`Brent ${sg(V(rows,'Commodity','Brent','d5'),1,'%')} · WTI ${sg(V(rows,'Commodity','WTI','d5'),1,'%')}`],
+[isEn?'Credit':'信用',stateText('credit',c),`US HY ${nm(V(rows,'Credit Spread','US HY','latest'),0,'bp')} · US IG ${nm(V(rows,'Credit Spread','US IG','latest'),0,'bp')}`]
+];document.getElementById('cards').innerHTML=cards.map(x=>`<div class="card"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');if(cross.length){document.getElementById('cross').style.display='block';document.getElementById('cross').innerHTML=`<b>${isEn?'Cross-asset confirmation':'跨资产验证'}：</b>${cross.join(' ')}`}
+const y10=R(rows,'US Treasury','10y'),hy=R(rows,'Credit Spread','US HY'),br=R(rows,'Commodity','Brent'),sp=R(rows,'Equity','S&P 500'),semi=R(rows,'Equity','PHLX Semi'),btc=R(rows,'Commodity','BTC'),vix=R(rows,'Equity','VIX'),usd=R(rows,'Currency','USD Index'),curve=R(rows,'Curvature','2y10y'),cu=R(rows,'Commodity','Copper');const short=!isEn?`${primarySentence(rows,'d5')}。过去5个交易日，10年美债 ${sg(y10.d5,0,'bp')}、HY利差 ${sg(hy.d5,0,'bp')}、Brent ${sg(br.d5,1,'%')}、铜 ${sg(cu.d5,1,'%')}、标普500 ${sg(sp.d5,1,'%')}、费城半导体 ${sg(semi.d5,1,'%')}、BTC ${sg(btc.d5,1,'%')}。${c==='healthy'?'信用仍稳，当前更像“估值杀/久期杀”，而不是“信用杀”。':'信用不再完全稳定，需要提高基本面传导的警惕。'}`:`${primarySentence(rows,'d5')}. Over 5 trading days: US 10Y ${sg(y10.d5,0,'bp')}, HY spread ${sg(hy.d5,0,'bp')}, Brent ${sg(br.d5,1,'%')}, copper ${sg(cu.d5,1,'%')}, S&P 500 ${sg(sp.d5,1,'%')}, PHLX Semis ${sg(semi.d5,1,'%')}, BTC ${sg(btc.d5,1,'%')}. ${c==='healthy'?'Credit remains benign, so this is still more a valuation/duration shock than a credit event.':'Credit is no longer fully benign; fundamental transmission deserves more weight.'}`;const medium=!isEn?`${primarySentence(rows,'mtd')}。本月至今，10年美债 ${sg(y10.mtd,0,'bp')}、HY利差 ${sg(hy.mtd,0,'bp')}、Brent ${sg(br.mtd,1,'%')}、美元指数 ${sg(usd.mtd,1,'%')}、VIX ${sg(vix.mtd,1,'%')}。中期核心是“油价—长端利率—信用利差”是否形成共振；若 Brent 站上100–105美元、10年美债接近或突破5%、同时HY利差升向325bp以上，风险将从贴现率冲击升级为基本面/信用冲击。`:`${primarySentence(rows,'mtd')}. MTD: US 10Y ${sg(y10.mtd,0,'bp')}, HY spread ${sg(hy.mtd,0,'bp')}, Brent ${sg(br.mtd,1,'%')}, DXY ${sg(usd.mtd,1,'%')}, VIX ${sg(vix.mtd,1,'%')}. The medium-term regime depends on whether oil, long-end yields and credit spreads reinforce each other; Brent above $100–105, 10Y near/above 5%, and HY toward 325bp would mark a shift from discount-rate pressure to fundamental/credit tightening.`;const ld=lt==='bull'?(isEn?'The long-term constructive case is driven mainly by earnings and growth resilience, not easy liquidity.':'长期偏乐观主要来自盈利与增长韧性，而不是流动性宽松。'):lt==='bear'?(isEn?'The long-term cautious case is driven mainly by high capital costs and reflation constraints, not short-term volatility.':'长期偏谨慎主要来自高资本成本与再通胀约束，而不是短期波动。'):(isEn?'Long-term conditions reflect a balance between earnings resilience and a structurally higher cost of capital.':'长期处于盈利韧性与更高资本成本相互抵消的状态。');const long=`${ld} ${isEn?'YTD':'年初至今'}: S&P 500 ${sg(sp.ytd,1,'%')}, ${isEn?'PHLX Semis':'费城半导体'} ${sg(semi.ytd,1,'%')}, ${isEn?'copper':'铜'} ${sg(cu.ytd,1,'%')}, BTC ${sg(btc.ytd,1,'%')}, HY ${sg(hy.ytd,0,'bp')}; 2Y-10Y ${nm(curve.latest,0,'bp')}. ${isEn?'As long as credit stays contained, the core long-run question is whether EPS/ROIC growth can offset higher risk-free rates and term premia.':'只要信用维持稳定，长期定价核心仍是 EPS/ROIC 能否覆盖更高的无风险利率与期限溢价。'}`;const rowsOut=[[isEn?'Short term (1–2 weeks)':'短期（1–2周）',L.tones[st.tone],primaryLabel(st.primary),short],[isEn?'Medium term (1–3 months)':'中期（1–3个月）',L.tones[mt.tone],primaryLabel(mt.primary),medium],[isEn?'Long term (6–12 months)':'长期（6–12个月）',L.tones[lt],isEn?'Earnings vs. cost of capital':'盈利 vs. 资本成本',long]];document.getElementById('analysisRows').innerHTML=rowsOut.map(x=>`<div class="macro-row"><div class="horizon">${x[0]}<span class="tone">${x[1]}</span><span class="primary">${isEn?'Primary driver':'主驱动'}：${x[2]}</span></div><div>${x[3]}</div></div>`).join('');document.getElementById('analysis').style.display='block'}
+(async()=>{try{const resp=await fetch('/data/market.json?ts='+Date.now(),{cache:'no-store'}),data=await resp.json();if(!resp.ok)throw new Error(data.error||'API error');document.getElementById('left').innerHTML=build(data.rows,['US Treasury','Curvature','Credit Spread','DM Rates','Commodity']);document.getElementById('right').innerHTML=build(data.rows,['Equity','Currency']);document.getElementById('status').style.display='none';document.getElementById('grid').style.display='grid';document.getElementById('source').textContent=L.source;document.getElementById('source').style.display='block';renderAnalysis(data.rows)}catch(e){document.getElementById('status').textContent=(isEn?'Data update failed: ':'数据更新失败：')+e.message}})();
 </script>
 </body>
 </html>

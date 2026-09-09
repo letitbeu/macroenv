@@ -18,13 +18,14 @@
   tbody td{height:24px;padding:3px 7px;border-bottom:1px solid #d8d8d8;white-space:nowrap;overflow:hidden;text-overflow:clip}
   tbody tr:last-child td{border-bottom:2px solid #353535} tbody td:first-child{text-align:left} tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
   .latest{background:#fff}.p1{background:#e3f1e6}.p2{background:#b9dfc2}.p3{background:#70c68b}.n1{background:#fae7e8}.n2{background:#f7c4c7}.n3{background:#ef777f}.z{background:#f7f7f7}.na{color:#aaa}
+  .source-link{color:inherit;text-decoration:none;border-bottom:1px dotted #9aa0a6;cursor:pointer}.source-link:hover{color:#0877b7;border-bottom-color:#0877b7}
   .source{font-size:11px;margin:6px 0 0 4px;color:#2f2f2f}.status{font-size:12px;color:#888;margin:8px 0 0 12px}
   .analysis{margin:28px 0 0 4px;border-top:2px solid #353535;padding-top:10px;display:none}
   .analysis-title{font-size:18px;font-weight:700;margin:0 0 10px}
   .analysis-row{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #d8d8d8;font-size:13px;line-height:1.65}
   .analysis-row:last-child{border-bottom:0}.horizon{font-weight:700}.tone{font-weight:700}
   @media(max-width:1160px){.sheet{transform-origin:top left;transform:scale(calc((100vw - 12px)/1120));margin-left:6px;margin-right:0}}
-  @media print{.sheet{margin:0 auto}.analysis{break-inside:avoid}}
+  @media print{.sheet{margin:0 auto}.analysis{break-inside:avoid}.source-link{border-bottom:0}}
 </style>
 </head>
 <body>
@@ -44,7 +45,7 @@ const isEn = location.pathname === '/en' || location.pathname.startsWith('/en/')
 const T = {
   zh:{
     title:'1. 市场概览',loading:'正在更新市场数据…',source:'数据来源：FRED、Yahoo Finance、日本财务省',
-    analysisTitle:'自动解读',
+    analysisTitle:'自动解读',sourceTip:'点击打开原始数据源',
     groups:{'US Treasury':'美国国债','Curvature':'收益率曲线','Credit Spread':'信用利差','DM Rates':'发达市场利率','Commodity':'大宗商品','Equity':'股票','Currency':'外汇'},
     first:{'US Treasury':'期限','Curvature':'美债','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
     headsRate:['最新 (%)','5日','月初至今','年初至今'],headsBps:['最新 (bps)','5日','月初至今','年初至今'],headsPct:['最新','5日 (%)','月初至今 %','年初至今 %'],
@@ -53,7 +54,7 @@ const T = {
     names:{'3m':'3个月','1y':'1年','2y':'2年','5y':'5年','10y':'10年','30y':'30年','2y10y':'2年-10年','5y30y':'5年-30年','10y30y':'10年-30年','US IG':'美国投资级','US HY':'美国高收益','UK 10y':'英国10年','DE 10y':'德国10年','Italy 10y':'意大利10年','Japan 20y':'日本20年','Aussie 10y':'澳大利亚10年','Gold':'黄金','Silver':'白银','Copper':'铜','Brent':'布伦特原油','WTI':'WTI原油','N.Gas':'天然气','Dow Jones':'道琼斯','S&P 500':'标普500','NASDAQ':'纳斯达克','Russell 2k':'罗素2000','PHLX Semi':'费城半导体','VIX':'VIX','Euro Stox':'欧洲斯托克','UK':'英国','France':'法国','Germany':'德国','Swiss':'瑞士','Nikkei':'日经225','Hang Seng':'恒生指数','CSI 300':'沪深300','Taiwan':'台湾加权','Singapore':'新加坡','India':'印度','Australia':'澳大利亚','USD Index':'美元指数','EUR':'欧元','GBP':'英镑','CHF':'瑞郎','JPY':'日元','AUD':'澳元','HKD':'港元','THB':'泰铢','MYR':'马来西亚林吉特','INR':'印度卢比','IDR':'印尼盾','KRW':'韩元','CNH':'离岸人民币'}
   },
   en:{
-    title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan',analysisTitle:'Automated Interpretation',
+    title:'1. Market Overview',loading:'Updating market data…',source:'Source: FRED, Yahoo Finance, Ministry of Finance Japan',analysisTitle:'Automated Interpretation',sourceTip:'Open original data source',
     groups:{'US Treasury':'US Treasury','Curvature':'Curvature','Credit Spread':'Credit Spread','DM Rates':'DM Rates','Commodity':'Commodity','Equity':'Equity','Currency':'Currency'},
     first:{'US Treasury':'Tenor','Curvature':'UST','Credit Spread':'','DM Rates':'','Commodity':'','Equity':'','Currency':''},
     headsRate:['Latest (%)','5Day','MTD','YTD'],headsBps:['Latest (bps)','5Day','MTD','YTD'],headsPct:['Latest','5Day (%)','MTD %','YTD %'],
@@ -69,7 +70,18 @@ function heat(v,unit){if(v==null||!Number.isFinite(v))return '';const a=Math.abs
 function paren(v,d=1){if(v==null||!Number.isFinite(v))return'<span class="na">—</span>';const x=Math.abs(v)<.05?0:v;return x<0?`(${Math.abs(x).toFixed(d)})`:x.toFixed(d)}
 function latest(r){if(r.latest==null||!Number.isFinite(r.latest))return'<span class="na">—</span>';const d=r.decimals??1;return Number(r.latest).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d})}
 function heads(group){if(group==='US Treasury')return L.headsRate;if(group==='Curvature'||group==='Credit Spread')return L.headsBps;if(group==='DM Rates')return L.headsRate;return L.headsPct}
-function section(group,rows){const h=heads(group),unit=['US Treasury','Curvature','Credit Spread','DM Rates'].includes(group)?'bps':'pct';return `<div class="section"><div class="section-name">${L.groups[group]}</div><table><colgroup><col class="c1"><col class="cn"><col class="cn"><col class="cn"><col class="cn"></colgroup><thead><tr><th>${L.first[group]||''}</th><th>${h[0]}</th><th>${h[1]}</th><th>${h[2]}</th><th>${h[3]}</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${label(r.name)}</td><td class="latest">${latest(r)}</td><td class="${heat(r.d5,unit)}">${paren(r.d5,unit==='bps'?0:1)}</td><td class="${heat(r.mtd,unit)}">${paren(r.mtd,unit==='bps'?0:1)}</td><td class="${heat(r.ytd,unit)}">${paren(r.ytd,unit==='bps'?0:1)}</td></tr>`).join('')}</tbody></table></div>`}
+function sourceUrl(r){
+  if(r.group==='Curvature'){
+    const pairs={'2y10y':['DGS2','DGS10'],'5y30y':['DGS5','DGS30'],'10y30y':['DGS10','DGS30']};
+    const p=pairs[r.name]; if(p)return `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${p[0]},${p[1]}`;
+  }
+  if(r.group==='DM Rates'&&r.name==='Japan 20y')return 'https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/historical/jgbcme_all.csv';
+  if(r.id)return `https://fred.stlouisfed.org/series/${encodeURIComponent(r.id)}`;
+  if(r.symbol)return `https://finance.yahoo.com/quote/${encodeURIComponent(r.symbol)}`;
+  return null;
+}
+function sourceAnchor(r){const u=sourceUrl(r),txt=label(r.name);return u?`<a class="source-link" href="${u}" target="_blank" rel="noopener noreferrer" title="${L.sourceTip}">${txt}</a>`:txt}
+function section(group,rows){const h=heads(group),unit=['US Treasury','Curvature','Credit Spread','DM Rates'].includes(group)?'bps':'pct';return `<div class="section"><div class="section-name">${L.groups[group]}</div><table><colgroup><col class="c1"><col class="cn"><col class="cn"><col class="cn"><col class="cn"></colgroup><thead><tr><th>${L.first[group]||''}</th><th>${h[0]}</th><th>${h[1]}</th><th>${h[2]}</th><th>${h[3]}</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${sourceAnchor(r)}</td><td class="latest">${latest(r)}</td><td class="${heat(r.d5,unit)}">${paren(r.d5,unit==='bps'?0:1)}</td><td class="${heat(r.mtd,unit)}">${paren(r.mtd,unit==='bps'?0:1)}</td><td class="${heat(r.ytd,unit)}">${paren(r.ytd,unit==='bps'?0:1)}</td></tr>`).join('')}</tbody></table></div>`}
 function build(rows,groups){return groups.map(g=>section(g,rows.filter(r=>r.group===g))).join('')}
 function getRow(rows,group,name){return rows.find(r=>r.group===group&&r.name===name)||{}}
 function n(v,d=1){return Number.isFinite(v)?Number(v).toFixed(d):'—'}

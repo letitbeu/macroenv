@@ -138,4 +138,4 @@ function render(rows){
   document.getElementById('rows').innerHTML=narratives(rows).map(x=>`<div class="row"><div class="h">${x[0]}<br>${x[1]}<br><span class="tag">${L.dn[x[2]]}</span></div><div>${x[3]}</div></div>`).join('');
   document.getElementById('analysis').style.display='block';
 }
-fetch('/api/market',{cache:'no-store'}).then(r=>r.json().then(j=>({ok:r.ok,j}))).then(({ok,j})=>{if(!ok)throw new Error(j.error||'API error');render(j.rows)}).catch(()=>{});
+fetch('/data/market.json',{cache:'no-store'}).then(r=>r.json().then(j=>({ok:r.ok,j}))).then(({ok,j})=>{if(!ok)throw new Error(j.error||'API error');render(j.rows)}).catch(()=>{});

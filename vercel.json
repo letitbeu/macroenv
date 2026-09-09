@@ -1,6 +1,11 @@
 {
   "rewrites": [
-    { "source": "/zh", "destination": "/index.html" },
-    { "source": "/en", "destination": "/index.html" }
+    { "source": "/", "destination": "/public/page.html" },
+    { "source": "/zh", "destination": "/public/page.html" },
+    { "source": "/zh/", "destination": "/public/page.html" },
+    { "source": "/en", "destination": "/public/page.html" },
+    { "source": "/en/", "destination": "/public/page.html" },
+    { "source": "/zh/base", "destination": "/index.html" },
+    { "source": "/en/base", "destination": "/index.html" }
   ]
 }

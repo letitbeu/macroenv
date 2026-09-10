@@ -5,16 +5,23 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/daily-market-refresh.yml'
+  # GitHub scheduled jobs at minute 00 can be delayed during peak load.
+  # Start at 09:55 Beijing (01:55 UTC) so the refreshed snapshot is ready around 10:00.
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '55 1 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: daily-market-snapshot
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,17 +30,22 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public/data
-          curl --fail --silent --show-error \
-            -H 'User-Agent: macroenv-daily-refresh/1.0' \
+          curl --retry 3 --retry-delay 5 --retry-all-errors --fail --silent --show-error \
+            --max-time 90 \
+            -H 'User-Agent: macroenv-daily-refresh/1.1' \
             "https://macroenv.vercel.app/api/market?refresh=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o /tmp/market.json
           python3 - <<'PY'
           import json
+          from datetime import datetime, timezone
           p='/tmp/market.json'
           data=json.load(open(p,'r',encoding='utf-8'))
           rows=data.get('rows') or []
-          if len(rows) < 20:
+          if len(rows) < 50:
               raise SystemExit(f'Invalid market snapshot: only {len(rows)} rows')
+          data['snapshotSchedule']='10:00 Asia/Shanghai'
+          data['refreshedBy']='github-actions'
+          data['workflowValidatedAt']=datetime.now(timezone.utc).isoformat()
           with open('public/data/market.json','w',encoding='utf-8') as f:
               json.dump(data,f,ensure_ascii=False,separators=(',',':'))
           PY

@@ -54,9 +54,13 @@ async function fetchYahooOne(meta){
       if(!result){lastErr=new Error(`Yahoo ${meta.symbol} empty`);continue;}
       const ts=result.timestamp||[];
       const close=result?.indicators?.quote?.[0]?.close||[];
-      const pts=ts.map((x,i)=>({t:x*1000,v:num(close[i])})).filter(x=>x.v!=null);
-      if(!pts.length){lastErr=new Error(`Yahoo ${meta.symbol} no prices`);continue;}
-      return {...meta,...stats(pts,'pct',1),provider:'Yahoo Finance'};
+      // Yahoo occasionally appends zero-valued placeholder bars (especially around weekends/market holidays).
+      // Prices for every instrument in this dashboard must be strictly positive, so discard those bars.
+      const pts=ts.map((x,i)=>({t:x*1000,v:num(close[i])})).filter(x=>x.v!=null&&x.v>0);
+      if(!pts.length){lastErr=new Error(`Yahoo ${meta.symbol} no valid positive prices`);continue;}
+      const s=stats(pts,'pct',1);
+      if(!(s.latest>0)){lastErr=new Error(`Yahoo ${meta.symbol} invalid latest price`);continue;}
+      return {...meta,...s,provider:'Yahoo Finance'};
     }catch(e){lastErr=e;}
     finally{t.clear();}
   }

@@ -32,17 +32,29 @@ jobs:
           mkdir -p public/data
           curl --retry 3 --retry-delay 5 --retry-all-errors --fail --silent --show-error \
             --max-time 90 \
-            -H 'User-Agent: macroenv-daily-refresh/1.1' \
+            -H 'User-Agent: macroenv-daily-refresh/1.2' \
             "https://macroenv.vercel.app/api/market?refresh=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o /tmp/market.json
           python3 - <<'PY'
           import json
           from datetime import datetime, timezone
+
           p='/tmp/market.json'
           data=json.load(open(p,'r',encoding='utf-8'))
           rows=data.get('rows') or []
           if len(rows) < 50:
               raise SystemExit(f'Invalid market snapshot: only {len(rows)} rows')
+
+          # Yahoo occasionally emits 0-valued placeholder bars around weekends/holidays.
+          # Never publish them because they create false -100% moves in the dashboard.
+          yahoo=[r for r in rows if r.get('provider')=='Yahoo Finance']
+          bad=[r for r in yahoo if not isinstance(r.get('latest'),(int,float)) or r.get('latest') <= 0]
+          if bad:
+              labels=', '.join(f"{r.get('name')}={r.get('latest')}" for r in bad[:12])
+              raise SystemExit(f'Invalid Yahoo zero/null prices: {labels}')
+          if len(yahoo) < 35:
+              raise SystemExit(f'Incomplete Yahoo snapshot: only {len(yahoo)} valid Yahoo rows')
+
           data['snapshotSchedule']='10:00 Asia/Shanghai'
           data['refreshedBy']='github-actions'
           data['workflowValidatedAt']=datetime.now(timezone.utc).isoformat()
